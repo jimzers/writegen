@@ -1,7 +1,7 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import WriteGenForm from "./WriteGenForm";
@@ -42,7 +42,7 @@ export default function Main() {
 
     return (
         <div className={classes.root}>
-            <CssBaseline />
+            <CssBaseline/>
             <Container component="main" className={classes.main} maxWidth="md">
                 <Typography variant="h2" component="h1" gutterBottom>
                     WriteGen
@@ -54,12 +54,13 @@ export default function Main() {
                     {'WriteGen uses AI to write passages for you. But it needs your help! '}
                     {'Type in some text below and press submit to see your short story!'}
                 </Typography>
-                <WriteGenForm />
+                <WriteGenForm/>
             </Container>
             <footer className={classes.footer}>
                 <Container maxWidth="sm">
-                    <Typography variant="body1"><Link color="inherit" href={"https://github.com/jimzers/"}>Check out my other work</Link>!</Typography>
-                    <Copyright />
+                    <Typography variant="body1"><Link color="inherit" href={"https://github.com/jimzers/"}>Check out my
+                        other work</Link>!</Typography>
+                    <Copyright/>
                 </Container>
             </footer>
         </div>
