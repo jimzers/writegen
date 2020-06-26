@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import WriteGenForm from "./WriteGenForm";
 
 function Copyright() {
     return (
@@ -44,17 +45,20 @@ export default function Main() {
             <CssBaseline />
             <Container component="main" className={classes.main} maxWidth="md">
                 <Typography variant="h2" component="h1" gutterBottom>
-                    WriteGen - Your copypasta creator!
+                    WriteGen
                 </Typography>
-                <Typography variant="h5" component="h2" gutterBottom>
-                    {'WriteGen writes AI generated passages. But it needs your help! '}
+                <Typography variant="h5" component="h4" gutterBottom>
+                    {'Your own personal writer!'}
+                </Typography>
+                <Typography variant="body1">
+                    {'WriteGen uses AI to write passages for you. But it needs your help! '}
                     {'Type in some text below and press submit to see your short story!'}
                 </Typography>
-                <Typography variant="body1">Do something here I guess</Typography>
+                <WriteGenForm />
             </Container>
             <footer className={classes.footer}>
                 <Container maxWidth="sm">
-                    <Typography variant="body1">Checkout my <a href={"https://github.com/jimzers/"}>other work</a>!</Typography>
+                    <Typography variant="body1"><Link color="inherit" href={"https://github.com/jimzers/"}>Check out my other work</Link>!</Typography>
                     <Copyright />
                 </Container>
             </footer>
