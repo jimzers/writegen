@@ -5,6 +5,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import WriteGenForm from "./WriteGenForm";
+import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 
 function Copyright() {
     return (
@@ -28,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
     main: {
         marginTop: theme.spacing(8),
         marginBottom: theme.spacing(2),
+    },
+    body: {
+        marginBottom: theme.spacing(3)
     },
     footer: {
         padding: theme.spacing(3, 2),
@@ -54,12 +58,14 @@ export default function Main() {
                     {'WriteGen uses AI to write passages for you. But it needs your help! '}
                     {'Type in some text below and press submit to see your short story!'}
                 </Typography>
+            </Container>
+            <Container className={classes.body} maxWidth="md">
                 <WriteGenForm/>
             </Container>
             <footer className={classes.footer}>
                 <Container maxWidth="sm">
-                    <Typography variant="body1"><Link color="inherit" href={"https://github.com/jimzers/"}>Check out my
-                        other work</Link>!</Typography>
+                    <Typography variant="body1">Check out my
+                        <Link color="primary" variant="inherit" href={"https://github.com/jimzers/"}> other work</Link>!</Typography>
                     <Copyright/>
                 </Container>
             </footer>
