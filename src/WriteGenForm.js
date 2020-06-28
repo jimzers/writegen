@@ -18,6 +18,16 @@ import FormControl from "@material-ui/core/FormControl";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import InputLabel from "@material-ui/core/InputLabel";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import Alert from "@material-ui/lab/Alert";
+
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+
+import axios from "axios";
+
+const apiUrl = '/api/generate'
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -42,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
             marginBottom: theme.spacing(6),
             padding: theme.spacing(3),
         },
+        textAlign: 'center'
     },
     buttons: {
         display: 'flex',
@@ -63,54 +74,137 @@ export default function WriteGenForm() {
 
     const [TextInput, setTextInput] = React.useState("Type some sample text here. Press submit to load in the transformer's predictions!");
 
+    const [Loading, setLoading] = React.useState(false);
+
+    const [GeneratorOutput, setGenerateOutput] = React.useState(null);
+    const [apiError, setApiError] = React.useState(false);
+
     const changeTextInput = (e) => {
         setTextInput(e.target.value);
     }
 
-    console.log({MaxSampleLen, MinSampleLen});
+    // function sleep(milliseconds) {
+    //     const date = Date.now();
+    //     let currentDate = null;
+    //     do {
+    //         currentDate = Date.now();
+    //     } while (currentDate - date < milliseconds);
+    // }
+
+
+    const submitForm = () => {
+        setApiError(false);
+        setLoading(true);
+        // sleep(3000);
+        axios.post(apiUrl, {
+            "input": TextInput,
+            "iterations": Iterations,
+            "min_sample_len": MinSampleLen,
+            "max_sample_len": MaxSampleLen,
+            "past_context_len": PastContextLen
+        })
+            .then((response) => {
+                setGenerateOutput(response.data['output']);
+            })
+            .catch((error) => {
+                console.log(error);
+                setApiError(true);
+            })
+            .then(() => {
+                setLoading(false);
+            })
+    }
+
+    // console.log({MaxSampleLen, MinSampleLen});
     return (
         <main>
-            <Paper className={classes.paper} elevation={3}>
-                <Grid container spacing={1}>
-                    <Grid item>
-                        <InvertedInputSlider props={{"InputTitle": "Min Sample Length"}} data={{"MinSampleLen": MinSampleLen, "setMinSampleLen": setMinSampleLen, "MaxSampleLen": MaxSampleLen}} />
-                        <InputSlider props={{"InputTitle": "Max Sample Length", "minVal": MinSampleLen, "maxVal": 1000, "step": 50, "icon": 1}} data={{"topValue": MaxSampleLen, "setTopValue": setMaxSampleLen}}/>
-                    </Grid>
-                    <Grid item>
-                        <InputSlider props={{"InputTitle": "Past Context Length", "minVal": 50, "maxVal": 500, "step": 50, "icon": 2}} data={{"topValue": PastContextLen, "setTopValue": setPastContextLen}} />
-                        <InputSlider props={{"InputTitle": "Iterations", "minVal": 1, "maxVal": 10, "step": 1, "icon": 3}} data={{"topValue": Iterations, "setTopValue": setIterations}} />
-                    </Grid>
+            <Grid container spacing={2}>
+                <Grid item>
+                    {!apiError ? '' : (
+                        <Alert severity="error" onClose={() => {
+                            setApiError(false)
+                        }}>Sorry! Our AI writer is having some difficulty handling your request.</Alert>
+                    )}
+                    <Paper className={classes.paper} elevation={3}>
+                        <Grid container direction="row" justify="center" spacing={3}>
+                            <Grid item align="center" xs>
+                                <InvertedInputSlider props={{"InputTitle": "Min Sample Length"}} data={{
+                                    "MinSampleLen": MinSampleLen,
+                                    "setMinSampleLen": setMinSampleLen,
+                                    "MaxSampleLen": MaxSampleLen,
+                                    "isDisabled": Loading
+                                }}/>
+                            </Grid>
+                            <Grid item align="center" xs>
+                                <InputSlider props={{
+                                    "InputTitle": "Max Sample Length",
+                                    "minVal": MinSampleLen,
+                                    "maxVal": 1000,
+                                    "step": 50,
+                                    "icon": 1
+                                }} data={{"topValue": MaxSampleLen, "setTopValue": setMaxSampleLen, "isDisabled": Loading}}/>
+                            </Grid>
+                            <Grid item align="center" xs>
+                                <InputSlider props={{
+                                    "InputTitle": "Past Context Length",
+                                    "minVal": 50,
+                                    "maxVal": 500,
+                                    "step": 50,
+                                    "icon": 2
+                                }} data={{"topValue": PastContextLen, "setTopValue": setPastContextLen, "isDisabled": Loading}}/>
+                            </Grid>
+                            <Grid item align="center" xs>
+                                <InputSlider props={{
+                                    "InputTitle": "Iterations",
+                                    "minVal": 1,
+                                    "maxVal": 10,
+                                    "step": 1,
+                                    "icon": 3
+                                }} data={{"topValue": Iterations, "setTopValue": setIterations, "isDisabled": Loading}}/>
+                            </Grid>
+                            {/*</Paper>*/}
+                            {/*<Paper className={classes.paper} elevation={3}>*/}
+
+                            <Grid item xs={12}>
+                                <FormControl disabled={Loading} fullWidth className={classes.margin} variant="outlined">
+                                    <InputLabel htmlFor="outlined-adornment-amount">Jumpstart Text</InputLabel>
+                                    <OutlinedInput
+                                        id="outlined-adornment-amount"
+                                        multiline
+                                        rows={2}
+                                        rowsMin={2}
+                                        value={TextInput}
+                                        onChange={changeTextInput}
+                                        labelWidth={110}
+                                        placeholder="Write some jumpstart text here to be fed to the writer!"
+                                    />
+                                </FormControl>
+                            </Grid>
+
+                        </Grid>
+
+                    </Paper>
+                    <Button variant="contained" color="primary" onClick={submitForm}>
+                        Generate my writing!
+                    </Button>
                 </Grid>
-            </Paper>
-            <Paper className={classes.paper} elevation={3}>
-                {/*<TextareaAutosize*/}
-                {/*    aria-setsize={100}*/}
-                {/*    id="outlined-multiline-static"*/}
-                {/*    label="Multiline"*/}
-                {/*    multiline*/}
-                {/*    aria-label="maximum height"*/}
-                {/*    placeholder="Type your prompt here..."*/}
-                {/*    rowsMin={10}*/}
-                {/*    value={TextInput}*/}
-                {/*    variant="outlined"*/}
-                {/*    onChange={changeTextInput}*/}
-                {/*/>*/}
 
-                <FormControl fullWidth className={classes.margin} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-amount">Jumpstart Text</InputLabel>
-                    <OutlinedInput
-                        id="outlined-adornment-amount"
-                        multiline
-                        rows={2}
-                        rowsMin={2}
-                        value={TextInput}
-                        onChange={changeTextInput}
-                        labelWidth={110}
-                        placeholder="Write some jumpstart text here to be fed to the writer!"
-                    />
-                </FormControl>
+                {!Loading ? '' : (
+                    <Grid item>
+                        <LinearProgress/>
+                    </Grid>
+                )}
 
-            </Paper>
+                <Grid item>
+                    {!GeneratorOutput ? '' : (
+                        <Paper className={classes.paper} elevation={3}>
+                            <Typography variant="body1">
+                                {GeneratorOutput}
+                            </Typography>
+                        </Paper>
+                    )}
+                </Grid>
+            </Grid>
         </main>
     )
 }
