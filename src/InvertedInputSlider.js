@@ -20,6 +20,8 @@ export default function InvertedInputSlider(props) {
     const value = props.data.MinSampleLen;
     const setValue = props.data.setMinSampleLen;
     const maxValue = props.data.MaxSampleLen;
+
+    const isDisabled = props.data["isDisabled"];
     // console.log("the value: " + value)
 
     const handleSliderChange = (event, newValue) => {
@@ -49,6 +51,7 @@ export default function InvertedInputSlider(props) {
                 </Grid>
                 <Grid item xs>
                     <Slider
+                        disabled={isDisabled}
                         track="inverted"
                         min={100}
                         max={maxValue}
@@ -60,6 +63,7 @@ export default function InvertedInputSlider(props) {
                 </Grid>
                 <Grid item>
                     <Input
+                        disabled={isDisabled}
                         className={classes.input}
                         value={value}
                         margin="dense"

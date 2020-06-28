@@ -35,6 +35,8 @@ export default function InputSlider(props) {
 
     const icon = iconMap[props.props["icon"]];
 
+    const isDisabled = props.data["isDisabled"];
+
     // console.log("the value: " + value)
 
     const handleSliderChange = (event, newValue) => {
@@ -65,6 +67,7 @@ export default function InputSlider(props) {
                 </Grid>
                 <Grid item xs>
                     <Slider
+                        disabled={isDisabled}
                         min={minValue}
                         max={maxLimit}
                         step={stepVal}
@@ -75,6 +78,7 @@ export default function InputSlider(props) {
                 </Grid>
                 <Grid item>
                     <Input
+                        disabled={isDisabled}
                         className={classes.input}
                         value={value}
                         margin="dense"
