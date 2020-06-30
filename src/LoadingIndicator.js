@@ -8,8 +8,8 @@ export default function LoadingIndicator(props) {
     return (
         <div className="loading-indicator">
             {!loading ? '' :
-            <LinearProgress />}
+                <LinearProgress/>}
         </div>
-        )
+    )
 }
 

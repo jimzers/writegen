@@ -117,94 +117,107 @@ export default function WriteGenForm() {
             <Grid container spacing={2}>
                 <Grid container item justify="center" spacing={2}>
                     <Grid item>
-                    {!apiError ? '' : (
-                        <Alert severity="error" onClose={() => {
-                            setApiError(false)
-                        }}>Sorry! Our AI writer is having some difficulty handling your request.</Alert>
-                    )}
+                        {!apiError ? '' : (
+                            <Alert severity="error" onClose={() => {
+                                setApiError(false)
+                            }}>Sorry! Our AI writer is having some difficulty handling your request.</Alert>
+                        )}
                     </Grid>
                     <Grid item>
-                    <ExpansionPanel classes={classes.paper} elevation={3} defaultExpanded={true}>
-                    <ExpansionPanelSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                    >
-                        <Typography className={classes.heading}>Writer Settings</Typography>
-                    </ExpansionPanelSummary>
-                    <ExpansionPanelDetails>
-                    {/*<Paper className={classes.paper} elevation={3}>*/}
-                        <Grid container direction="row" justify="center" spacing={3}>
-                            <Grid item align="center" xs>
-                                <InvertedInputSlider props={{"InputTitle": "Min Sample Length"}} data={{
-                                    "MinSampleLen": MinSampleLen,
-                                    "setMinSampleLen": setMinSampleLen,
-                                    "MaxSampleLen": MaxSampleLen,
-                                    "isDisabled": Loading
-                                }}/>
-                            </Grid>
-                            <Grid item align="center" xs>
-                                <InputSlider props={{
-                                    "InputTitle": "Max Sample Length",
-                                    "minVal": MinSampleLen,
-                                    "maxVal": 1000,
-                                    "step": 50,
-                                    "icon": 1
-                                }} data={{"topValue": MaxSampleLen, "setTopValue": setMaxSampleLen, "isDisabled": Loading}}/>
-                            </Grid>
-                            <Grid item align="center" xs>
-                                <InputSlider props={{
-                                    "InputTitle": "Past Context Length",
-                                    "minVal": 50,
-                                    "maxVal": 300,
-                                    "step": 10,
-                                    "icon": 2
-                                }} data={{"topValue": PastContextLen, "setTopValue": setPastContextLen, "isDisabled": Loading}}/>
-                            </Grid>
-                            <Grid item align="center" xs>
-                                <InputSlider props={{
-                                    "InputTitle": "Iterations",
-                                    "minVal": 1,
-                                    "maxVal": 10,
-                                    "step": 1,
-                                    "icon": 3
-                                }} data={{"topValue": Iterations, "setTopValue": setIterations, "isDisabled": Loading}}/>
-                            </Grid>
-                            {/*</Paper>*/}
-                            {/*<Paper className={classes.paper} elevation={3}>*/}
+                        <ExpansionPanel classes={classes.paper} elevation={3} defaultExpanded={true}>
+                            <ExpansionPanelSummary
+                                expandIcon={<ExpandMoreIcon/>}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                            >
+                                <Typography className={classes.heading}>Writer Settings</Typography>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                                {/*<Paper className={classes.paper} elevation={3}>*/}
+                                <Grid container direction="row" justify="center" spacing={3}>
+                                    <Grid item align="center" xs>
+                                        <InvertedInputSlider props={{"InputTitle": "Min Sample Length"}} data={{
+                                            "MinSampleLen": MinSampleLen,
+                                            "setMinSampleLen": setMinSampleLen,
+                                            "MaxSampleLen": MaxSampleLen,
+                                            "isDisabled": Loading
+                                        }}/>
+                                    </Grid>
+                                    <Grid item align="center" xs>
+                                        <InputSlider props={{
+                                            "InputTitle": "Max Sample Length",
+                                            "minVal": MinSampleLen,
+                                            "maxVal": 1000,
+                                            "step": 50,
+                                            "icon": 1
+                                        }} data={{
+                                            "topValue": MaxSampleLen,
+                                            "setTopValue": setMaxSampleLen,
+                                            "isDisabled": Loading
+                                        }}/>
+                                    </Grid>
+                                    <Grid item align="center" xs>
+                                        <InputSlider props={{
+                                            "InputTitle": "Past Context Length",
+                                            "minVal": 50,
+                                            "maxVal": 300,
+                                            "step": 10,
+                                            "icon": 2
+                                        }} data={{
+                                            "topValue": PastContextLen,
+                                            "setTopValue": setPastContextLen,
+                                            "isDisabled": Loading
+                                        }}/>
+                                    </Grid>
+                                    <Grid item align="center" xs>
+                                        <InputSlider props={{
+                                            "InputTitle": "Iterations",
+                                            "minVal": 1,
+                                            "maxVal": 10,
+                                            "step": 1,
+                                            "icon": 3
+                                        }} data={{
+                                            "topValue": Iterations,
+                                            "setTopValue": setIterations,
+                                            "isDisabled": Loading
+                                        }}/>
+                                    </Grid>
+                                    {/*</Paper>*/}
+                                    {/*<Paper className={classes.paper} elevation={3}>*/}
 
-                            <Grid item xs={12}>
-                                <FormControl disabled={Loading} fullWidth className={classes.margin} variant="outlined">
-                                    <InputLabel htmlFor="outlined-adornment-amount">Jumpstart Text</InputLabel>
-                                    <OutlinedInput
-                                        id="outlined-adornment-amount"
-                                        multiline
-                                        rows={2}
-                                        rowsMin={2}
-                                        value={TextInput}
-                                        onChange={changeTextInput}
-                                        labelWidth={110}
-                                        placeholder="Write some jumpstart text here to be fed to the writer!"
-                                    />
-                                </FormControl>
-                            </Grid>
+                                    <Grid item xs={12}>
+                                        <FormControl disabled={Loading} fullWidth className={classes.margin}
+                                                     variant="outlined">
+                                            <InputLabel htmlFor="outlined-adornment-amount">Jumpstart Text</InputLabel>
+                                            <OutlinedInput
+                                                id="outlined-adornment-amount"
+                                                multiline
+                                                rows={2}
+                                                rowsMin={2}
+                                                value={TextInput}
+                                                onChange={changeTextInput}
+                                                labelWidth={110}
+                                                placeholder="Write some jumpstart text here to be fed to the writer!"
+                                            />
+                                        </FormControl>
+                                    </Grid>
 
-                        </Grid>
+                                </Grid>
 
-                    {/*</Paper>*/}
-                    </ExpansionPanelDetails>
-                    </ExpansionPanel>
+                                {/*</Paper>*/}
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
                     </Grid>
                     <Grid item>
-                    <Button disabled={Loading} variant="contained" color="primary" onClick={submitForm}>
-                        Generate my writing!
-                    </Button>
+                        <Button disabled={Loading} variant="contained" color="primary" onClick={submitForm}>
+                            Generate my writing!
+                        </Button>
                     </Grid>
                 </Grid>
 
                 {!Loading ? '' : (
                     <Grid item xs>
-                        <LoadingIndicator isLoading={Loading} />
+                        <LoadingIndicator isLoading={Loading}/>
                     </Grid>
                 )}
 
