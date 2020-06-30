@@ -33,8 +33,8 @@ export default function InvertedInputSlider(props) {
     };
 
     const handleBlur = () => {
-        if (value < 50) {
-            setValue(50);
+        if (value < 200) {
+            setValue(200);
         } else if (value > maxValue) {
             setValue(maxValue);
         }
@@ -53,7 +53,7 @@ export default function InvertedInputSlider(props) {
                     <Slider
                         disabled={isDisabled}
                         track="inverted"
-                        min={100}
+                        min={200}
                         max={maxValue}
                         step={50}
                         value={typeof value === 'number' ? value : 0}
@@ -71,7 +71,7 @@ export default function InvertedInputSlider(props) {
                         onBlur={handleBlur}
                         inputProps={{
                             step: 50,
-                            min: 100,
+                            min: 200,
                             max: maxValue,
                             type: 'number',
                             'aria-labelledby': 'input-slider',
