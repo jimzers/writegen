@@ -22,7 +22,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import LoadingIndicator from "./LoadingIndicator";
 
-const apiUrl = 'http://6ecb0e041a5a.ngrok.io'
+const apiUrl = ''
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
