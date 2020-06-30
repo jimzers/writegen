@@ -24,10 +24,13 @@ import Alert from "@material-ui/lab/Alert";
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 
 import axios from "axios";
+import LoadingIndicator from "./LoadingIndicator";
 
-const apiUrl = '/api/generate'
+const apiUrl = 'http://6ecb0e041a5a.ngrok.io'
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -96,7 +99,7 @@ export default function WriteGenForm() {
         setApiError(false);
         setLoading(true);
         // sleep(3000);
-        axios.post(apiUrl, {
+        axios.post(apiUrl + '/api/generate', {
             "input": TextInput,
             "iterations": Iterations,
             "min_sample_len": MinSampleLen,
@@ -104,7 +107,8 @@ export default function WriteGenForm() {
             "past_context_len": PastContextLen
         })
             .then((response) => {
-                setGenerateOutput(response.data['output']);
+                const outputStr = response.data['output'].replace(/<\|startoftext\|>|<\|endoftext\|>|\n\n\n\n/gi, '')
+                setGenerateOutput(outputStr);
             })
             .catch((error) => {
                 console.log(error);
@@ -119,13 +123,25 @@ export default function WriteGenForm() {
     return (
         <main>
             <Grid container spacing={2}>
-                <Grid item>
+                <Grid container item justify="center" spacing={2}>
+                    <Grid item>
                     {!apiError ? '' : (
                         <Alert severity="error" onClose={() => {
                             setApiError(false)
                         }}>Sorry! Our AI writer is having some difficulty handling your request.</Alert>
                     )}
-                    <Paper className={classes.paper} elevation={3}>
+                    </Grid>
+                    <Grid item>
+                    <ExpansionPanel classes={classes.paper} elevation={3} defaultExpanded={true}>
+                    <ExpansionPanelSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                    >
+                        <Typography className={classes.heading}>Writer Settings</Typography>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                    {/*<Paper className={classes.paper} elevation={3}>*/}
                         <Grid container direction="row" justify="center" spacing={3}>
                             <Grid item align="center" xs>
                                 <InvertedInputSlider props={{"InputTitle": "Min Sample Length"}} data={{
@@ -148,8 +164,8 @@ export default function WriteGenForm() {
                                 <InputSlider props={{
                                     "InputTitle": "Past Context Length",
                                     "minVal": 50,
-                                    "maxVal": 500,
-                                    "step": 50,
+                                    "maxVal": 300,
+                                    "step": 10,
                                     "icon": 2
                                 }} data={{"topValue": PastContextLen, "setTopValue": setPastContextLen, "isDisabled": Loading}}/>
                             </Grid>
@@ -183,22 +199,27 @@ export default function WriteGenForm() {
 
                         </Grid>
 
-                    </Paper>
-                    <Button variant="contained" color="primary" onClick={submitForm}>
+                    {/*</Paper>*/}
+                    </ExpansionPanelDetails>
+                    </ExpansionPanel>
+                    </Grid>
+                    <Grid item>
+                    <Button disabled={Loading} variant="contained" color="primary" onClick={submitForm}>
                         Generate my writing!
                     </Button>
+                    </Grid>
                 </Grid>
 
                 {!Loading ? '' : (
-                    <Grid item>
-                        <LinearProgress/>
+                    <Grid item xs>
+                        <LoadingIndicator isLoading={Loading} />
                     </Grid>
                 )}
 
                 <Grid item>
                     {!GeneratorOutput ? '' : (
                         <Paper className={classes.paper} elevation={3}>
-                            <Typography variant="body1">
+                            <Typography style={{whiteSpace: 'pre-line'}} align="justify" variant="body1">
                                 {GeneratorOutput}
                             </Typography>
                         </Paper>
