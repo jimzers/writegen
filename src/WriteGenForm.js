@@ -73,7 +73,7 @@ export default function WriteGenForm() {
     const [PastContextLen, setPastContextLen] = React.useState(100);
     const [Iterations, setIterations] = React.useState(3);
 
-    const [writerType, changeWriterType] = React.useState('Spongebob Transcripts');
+    const [writerType, changeWriterType] = React.useState("spongebob");
 
     const [TextInput, setTextInput] = React.useState("Type some sample text here. Press submit to load in the writer's predictions!");
 
@@ -251,6 +251,9 @@ export default function WriteGenForm() {
 
                 {!Loading ? '' : (
                     <Grid item xs>
+                        <Typography>
+                            {"The writer is working hard! Expect wait times of around 1-3 minutes."}
+                        </Typography>
                         <LoadingIndicator isLoading={Loading}/>
                     </Grid>
                 )}
