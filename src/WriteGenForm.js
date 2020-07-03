@@ -75,7 +75,7 @@ export default function WriteGenForm() {
 
     const [writerType, changeWriterType] = React.useState('Spongebob Transcripts');
 
-    const [TextInput, setTextInput] = React.useState("Type some sample text here. Press submit to load in the transformer's predictions!");
+    const [TextInput, setTextInput] = React.useState("Type some sample text here. Press submit to load in the writer's predictions!");
 
     const [Loading, setLoading] = React.useState(false);
 
