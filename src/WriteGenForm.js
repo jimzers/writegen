@@ -199,7 +199,8 @@ export default function WriteGenForm() {
                                     {/*<Paper className={classes.paper} elevation={3}>*/}
 
                                     <Grid item xs>
-                                        <FormControl disabled={Loading} variant="outlined" className={classes.formControl}>
+                                        <FormControl disabled={Loading} variant="outlined"
+                                                     className={classes.formControl}>
                                             <InputLabel htmlFor="outlined-age-native-simple">Writer</InputLabel>
                                             <Select
                                                 native
