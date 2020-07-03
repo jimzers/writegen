@@ -20,6 +20,8 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+import Select from "@material-ui/core/Select";
+
 import LoadingIndicator from "./LoadingIndicator";
 
 const apiUrl = ''
@@ -49,6 +51,10 @@ const useStyles = makeStyles((theme) => ({
         },
         textAlign: 'center'
     },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 120,
+    },
     buttons: {
         display: 'flex',
         justifyContent: 'flex-end',
@@ -67,6 +73,8 @@ export default function WriteGenForm() {
     const [PastContextLen, setPastContextLen] = React.useState(100);
     const [Iterations, setIterations] = React.useState(3);
 
+    const [writerType, changeWriterType] = React.useState('Spongebob Transcripts');
+
     const [TextInput, setTextInput] = React.useState("Type some sample text here. Press submit to load in the transformer's predictions!");
 
     const [Loading, setLoading] = React.useState(false);
@@ -76,6 +84,10 @@ export default function WriteGenForm() {
 
     const changeTextInput = (e) => {
         setTextInput(e.target.value);
+    }
+
+    const changeWriterTypeSelect = (e) => {
+        changeWriterType(e.target.value)
     }
 
     // function sleep(milliseconds) {
@@ -96,7 +108,8 @@ export default function WriteGenForm() {
             "iterations": Iterations,
             "min_sample_len": MinSampleLen,
             "max_sample_len": MaxSampleLen,
-            "past_context_len": PastContextLen
+            "past_context_len": PastContextLen,
+            "writer": writerType
         })
             .then((response) => {
                 const outputStr = response.data['output'].replace(/<\|startoftext\|>|<\|endoftext\|>|\n\n\n\n/gi, '')
@@ -184,6 +197,27 @@ export default function WriteGenForm() {
                                     </Grid>
                                     {/*</Paper>*/}
                                     {/*<Paper className={classes.paper} elevation={3}>*/}
+
+                                    <Grid item xs>
+                                        <FormControl disabled={Loading} variant="outlined" className={classes.formControl}>
+                                            <InputLabel htmlFor="outlined-age-native-simple">Writer</InputLabel>
+                                            <Select
+                                                native
+                                                value={writerType}
+                                                onChange={changeWriterTypeSelect}
+                                                label="Writer"
+                                                inputProps={{
+                                                    name: 'writer',
+                                                    id: 'outlined-age-native-simple',
+                                                }}
+                                            >
+                                                {/*<option aria-label="None" value="" />*/}
+                                                <option value={"spongebob"}>Spongebob Transcripts</option>
+                                                <option value={"south-park"}>South Park</option>
+                                                <option value={"vanilla"}>Vanilla</option>
+                                            </Select>
+                                        </FormControl>
+                                    </Grid>
 
                                     <Grid item xs={12}>
                                         <FormControl disabled={Loading} fullWidth className={classes.margin}
