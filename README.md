@@ -6,7 +6,7 @@
 
 ## How to use:
 
-Go to our [website](https://writegen.com) and follow the instructions there. **NOTE:** Writing might take **1-5 minutes**, please be patient!
+Go to our [website](https://www.writegen.com) and follow the instructions there. **NOTE:** Writing might take **1-5 minutes**, please be patient!
 
 ## Coming Soon:
 
