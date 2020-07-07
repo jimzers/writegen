@@ -1,6 +1,8 @@
 # WriteGen - Your personal AI Writer!
 
-#####_WriteGen is an AI powered writer that allows you to become more productive and have fun. It comes preloaded with many themes (a whopping one theme!!!) to help you to fully express yourself!_
+##### _WriteGen is an AI powered writer that allows you to become more productive and have fun. It comes preloaded with many themes (a whopping one theme!!!) to help you to fully express yourself!_
+
+![WriteGen Demo](docs/writegen_demo.gif)
 
 ## How to use:
 
