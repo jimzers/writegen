@@ -69,7 +69,11 @@ export default function Main() {
             <footer className={classes.footer}>
                 <Container maxWidth="sm">
                     <Typography variant="body1">Check out my
-                        <Link color="primary" variant="inherit" href={"https://github.com/jimzers/"}> other work</Link>!</Typography>
+                        <Link color="primary" variant="inherit" href={"https://github.com/jimzers/"}> other work</Link>!
+                    </Typography>
+                    <Typography variant="body1">Or see the source code on GitHub at
+                        <Link color="primary" variant="inherit" href={"https://github.com/jimzers/writegen"}> jimzers/writegen</Link>.
+                    </Typography>
                     <Copyright/>
                 </Container>
             </footer>
