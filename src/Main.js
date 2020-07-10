@@ -20,9 +20,9 @@ function Copyright() {
     );
 }
 
-const muiTheme = createMuiTheme({
-    spacing: 2
-})
+// const muiTheme = createMuiTheme({
+//     spacing: 2
+// })
 
 const useStyles = makeStyles((theme) => ({
     root: {
