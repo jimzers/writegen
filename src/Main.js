@@ -5,7 +5,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import WriteGenForm from "./WriteGenForm";
-import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+// import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 
 function Copyright() {
     return (
