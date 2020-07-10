@@ -24,7 +24,7 @@ import Select from "@material-ui/core/Select";
 
 import LoadingIndicator from "./LoadingIndicator";
 
-const apiUrl = ''
+const apiUrl = 'https://writegen.nautilus.optiputer.net';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
