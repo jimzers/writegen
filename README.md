@@ -10,7 +10,7 @@ Go to our [website](https://writegen.com) and follow the instructions there. **N
 
 ## Coming Soon:
 
-- Different writer themes (If you have any suggestions, feel free to make a request here: https://github.com/jimzers/writegen/issues)
+- Different writer themes (If you have any suggestions, feel free to make a request here: https://github.com/jimzers/writegen/issues/new)
 - AI Voiceovers
 
 ## Acknowledgments
