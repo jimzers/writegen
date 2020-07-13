@@ -281,7 +281,7 @@ export default function WriteGenForm() {
                                         color="primary"
                                         size="large"
                                         className={classes.button}
-                                        startIcon={<SaveIcon />}
+                                        startIcon={<SaveIcon/>}
                                         onClick={downloadTxt}
                                     >
                                         Save
