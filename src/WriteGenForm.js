@@ -24,6 +24,8 @@ import Select from "@material-ui/core/Select";
 
 import LoadingIndicator from "./LoadingIndicator";
 
+import SaveIcon from '@material-ui/icons/Save';
+
 const apiUrl = 'https://writegen.nautilus.optiputer.net';
 
 const useStyles = makeStyles((theme) => ({
@@ -122,6 +124,15 @@ export default function WriteGenForm() {
             .then(() => {
                 setLoading(false);
             })
+    }
+
+    const downloadTxt = () => {
+        const txtObject = document.createElement("a");
+        const txtFile = new Blob([GeneratorOutput], {type: 'text/plain'});
+        txtObject.href = URL.createObjectURL(txtFile);
+        txtObject.download = "WriteGenOutput.txt";
+        document.body.appendChild(txtObject);
+        txtObject.click();
     }
 
     // console.log({MaxSampleLen, MinSampleLen});
@@ -262,9 +273,26 @@ export default function WriteGenForm() {
                 <Grid item>
                     {!GeneratorOutput ? '' : (
                         <Paper className={classes.paper} elevation={3}>
-                            <Typography style={{whiteSpace: 'pre-line'}} align="justify" variant="body1">
-                                {GeneratorOutput}
-                            </Typography>
+                            <Grid container direction="row" justify="center" spacing={3}>
+                                <Grid item xs>
+                                    <Button
+                                        disabled={Loading}
+                                        variant="contained"
+                                        color="primary"
+                                        size="large"
+                                        className={classes.button}
+                                        startIcon={<SaveIcon/>}
+                                        onClick={downloadTxt}
+                                    >
+                                        Save
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Typography style={{whiteSpace: 'pre-line'}} align="justify" variant="body1">
+                                        {GeneratorOutput}
+                                    </Typography>
+                                </Grid>
+                            </Grid>
                         </Paper>
                     )}
                 </Grid>
