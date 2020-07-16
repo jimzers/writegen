@@ -20,7 +20,8 @@
 ```
 
 - Equal signs should have whitespaces on [either side.](#whitespaceExample2)
-<a name="whitespaceExample2"></a>```
+<a name="whitespaceExample2"></a>
+```
 var num = 6; 
 ```
 
