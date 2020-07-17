@@ -120,12 +120,12 @@ import {
 <a name="ownLine"></a>
 ```
 // bad example
-return (<div><h1 style={hSty}>Jokes!</h1><h1 style={hSty}>Puns!</h1></div>)
+return (<div><h1 style = {hSty}> Jokes! </h1><h1 style = {hSty}> Puns! </h1></div>)
 
 // good example
 return (<div>
-    <h1 style={hSty}>Jokes!</h1>
-    <h1 style={hSty}>Puns!</h1>
+    <h1 style = {hSty}>Jokes!</h1>
+    <h1 style = {hSty}>Puns!</h1>
     </div>)
 
 ```
@@ -164,21 +164,21 @@ import React from "react"
 
 function Joke (props) {
     const JokeStyle = {
-        backgroundColor:"#F8F8FF",
+        backgroundColor: "#F8F8FF",
         padding: 10,
         margin: 5,
         textAlign: "center",
         fontSize: 16
     }
     if (props.oneJoke.question && props.oneJoke.answer) {
-        JokeStyle.color = "color:#008B8B"
-        return(<div style={JokeStyle}>
+        JokeStyle.color = "color: #008B8B"
+        return (<div style = {JokeStyle}>
         <p>{props.oneJoke.question}</p>
         <p>{props.oneJoke.answer}</p>
         </div>)
     } else if (!props.oneJoke.answer) {
-        return(<div style={JokeStyle}>
-        <p>{props.oneJoke.question}</p>
+        return (<div style = {JokeStyle}>
+        <p> {props.oneJoke.question} </p>
         </div>)
     }
 }
