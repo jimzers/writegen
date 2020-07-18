@@ -225,7 +225,7 @@ export default function WriteGenForm() {
                                             >
                                                 {/*<option aria-label="None" value="" />*/}
                                                 <option value={"spongebob"}>Spongebob Transcripts</option>
-                                                {/*<option value={"south-park"}>South Park</option>*/}
+                                                <option value={"southpark"}>South Park</option>
                                                 <option value={"vanilla"}>Vanilla</option>
                                             </Select>
                                         </FormControl>
