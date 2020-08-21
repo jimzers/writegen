@@ -25,7 +25,6 @@ import Select from "@material-ui/core/Select";
 import LoadingIndicator from "./LoadingIndicator";
 
 import SaveIcon from '@material-ui/icons/Save';
-import Sharing from "./sharingFunction"
 
 
 import {
