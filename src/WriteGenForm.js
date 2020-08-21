@@ -25,6 +25,79 @@ import Select from "@material-ui/core/Select";
 import LoadingIndicator from "./LoadingIndicator";
 
 import SaveIcon from '@material-ui/icons/Save';
+import Sharing from "./sharingFunction"
+
+
+import {
+  FacebookShareButton,
+  RedditShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+} from "react-share"
+import {
+  FacebookIcon,
+  RedditIcon,
+  TwitterIcon,
+  WhatsappIcon,
+} from "react-share";
+// import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+
+
+
+
+const elementStyle = {
+    marginTop: '85%'
+}
+
+function FacebookButton (props) {
+    return(
+        <div>
+        <FacebookShareButton
+          style={elementStyle}
+          url="https://writegen.com/"
+          quote={"Check this out! " + props.output} 
+          className="oneButton">
+          <FacebookIcon size={32} round />
+        </FacebookShareButton>
+        </div>
+    )
+}
+
+function TwitterButton (props) {
+    return(
+        <TwitterShareButton
+          style={elementStyle}
+          url={"https://writegen.com/ " + props.output}
+          title="Check this ultimate copypasta out!  Create your own!"
+          className="oneButton">
+          <TwitterIcon size={32} round />
+        </TwitterShareButton>
+    )
+}
+function WhatsappButton (props) {
+    return(
+        <WhatsappShareButton
+            style={elementStyle}
+            url={"https://writegen.com/  " + props.output}
+            quote="Check this Ultimate Copypasta"
+            className="oneButton">
+            <WhatsappIcon size={32} round />
+         </WhatsappShareButton>
+    )
+}
+
+
+function RedditButton (props) {
+    return(
+        <RedditShareButton
+            style={elementStyle}
+            url={"https://writegen.com/  " + props.output}
+            title="Check this Ultimate Copypasta"
+            className="oneButton">
+            <RedditIcon size={32} round />
+        </RedditShareButton>
+    )
+}
 
 const apiUrl = 'https://writegen.nautilus.optiputer.net';
 
@@ -81,7 +154,7 @@ export default function WriteGenForm() {
 
     const [Loading, setLoading] = React.useState(false);
 
-    const [GeneratorOutput, setGenerateOutput] = React.useState(null);
+    const [GeneratorOutput, setGenerateOutput] = React.useState("");
     const [apiError, setApiError] = React.useState(false);
 
     const changeTextInput = (e) => {
@@ -272,9 +345,21 @@ export default function WriteGenForm() {
 
                 <Grid item>
                     {!GeneratorOutput ? '' : (
-                        <Paper className={classes.paper} elevation={3}>
-                            <Grid container direction="row" justify="center" spacing={3}>
-                                <Grid item xs>
+                        <Paper className={classes.paper} elevation={2}>
+                            <Grid container direction="row" justify="center" spacing={4}>
+                                <Grid item>
+                                    <FacebookButton/>
+                                </Grid>
+                                <Grid item>
+                                    <TwitterButton/>
+                                </Grid>
+                                <Grid item>
+                                    <WhatsappButton/>
+                                </Grid>
+                                <Grid item>
+                                    <RedditButton/>
+                                </Grid>
+                                <Grid item xs={6}>
                                     <Button
                                         disabled={Loading}
                                         variant="contained"
@@ -283,7 +368,7 @@ export default function WriteGenForm() {
                                         className={classes.button}
                                         startIcon={<SaveIcon/>}
                                         onClick={downloadTxt}
-                                    >
+                                        >
                                         Save
                                     </Button>
                                 </Grid>
