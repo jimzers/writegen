@@ -32,7 +32,7 @@ git add file/path/here
 git commit -m "commit message here"
 
 # push to github, only need to do '--set-upstream' once. also replaceable with -u
-git push --set-upstream origin/branch-name
+git push --set-upstream origin branch-name
 ```
 
 ## Pulling the latest master changes to your branch
